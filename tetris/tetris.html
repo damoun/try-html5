@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tetris</title>
+
+    <script type="text/javascript" src="../lib/jquery-1.4.3.min.js"></script>
+    <script type="text/javascript" src="../lib/square.js"></script>
+    <script type="text/javascript" src="tetris.js"></script>
+
+    <style type="text/css">
+        canvas#area {
+            border-style: solid;
+            width: 200px;
+            height: 400px;
+            float: left;
+        }
+        canvas#next {
+            border-radius: 10px;
+            border-style: double;
+            width: 100px;
+            height: 100px
+        }
+        div#info {
+            text-align: center;
+        }
+        div {
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <canvas id="area">
+        <p>Your browser doesn't support canvas.</p>
+    </canvas>
+    <div id="info">
+        <h1>Score</h1>
+        <h1 id="score">0</h1>
+        </br>
+        <canvas id="next">
+            <p>Your browser doesn't support canvas.</p>
+        </canvas>
+    </div>
+</div>
+</body>
+</html>
