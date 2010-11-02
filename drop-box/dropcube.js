@@ -42,7 +42,8 @@ function main(can) {
             else if (listSquare.length > 0) {
                 loose = true;
                 if ((square.point.x >= lastSquare.point.x && square.point.x <= lastSquare.point.x + lastSquare.size.w)
-                        || (square.point.x + square.size.w >= lastSquare.point.x && square.point.x + square.size.w <= lastSquare.point.x + lastSquare.size.w))
+                        || (square.point.x + square.size.w >= lastSquare.point.x
+                        && square.point.x + square.size.w <= lastSquare.point.x + lastSquare.size.w))
                     var endY = lastSquare.point.y - square.size.h;
                 else
                     var endY = can.height - square.size.h;
@@ -69,9 +70,11 @@ function main(can) {
                                     if (square.deg != direction * 90 && y != can.height - square.size.h) {
                                         square.rotate(direction * 6);
                                         square.moveTo({x: x, y: y});
-                                        if (direction == 1 && x + square.size.w >= lastSquare.point.x && square.deg % 2 == 0)
+                                        if (direction == 1 && x + square.size.w >= lastSquare.point.x
+                                                && square.deg % 2 == 0)
                                             ++x;
-                                        else if (x + square.size.w < lastSquare.point.x + lastSquare.size.w && square.deg % 2 == 0)
+                                        else if (x + square.size.w < lastSquare.point.x + lastSquare.size.w
+                                                && square.deg % 2 == 0)
                                             --x;
                                     }
                                     else {

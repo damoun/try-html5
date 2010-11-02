@@ -92,7 +92,8 @@ function main(canvas) {
             // put the food on the area
             if (timer + 5000 <= date.getTime() && !food) {
                 food = new Square({x: Math.round(Math.random() * (canvas.width - head.size.w) / head.size.w) * head.size.w,
-                    y: Math.round(Math.random() * (canvas.height - head.size.h) / head.size.h) * head.size.h}, {w: 10, h: 10}, undefined, canvas);
+                    y: Math.round(Math.random() * (canvas.height - head.size.h) / head.size.h) * head.size.h},
+                {w: 10, h: 10}, undefined, canvas);
                 timer = date.getTime();
             }
             // remove the food on the area
