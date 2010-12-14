@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Drop Cube</title>
     
     <script type="text/javascript" src="../lib/jquery-1.4.3.min.js"></script>
@@ -8,15 +8,16 @@
     <script type="text/javascript" src="dropcube.js"></script>
 
     <style type="text/css">
-        canvas {
-            border-style: solid;
-        }
+      canvas {
+      border-style: solid;
+      }
     </style>
-</head>
-<body>
-<h1 id="score">0</h1>
-<canvas id="can">
-    <p>Your browser doesn't support canvas.</p>
-</canvas>
-</body>
+  </head>
+  <body>
+    <h1 id="score">0</h1>
+    <canvas id="can">
+      <p>Your browser doesn't support canvas.</p>
+    </canvas>
+    <input type="button" value="Replay" onClick="javascript: window.location = window.location;"></input>
+  </body>
 </html>

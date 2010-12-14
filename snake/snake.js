@@ -3,7 +3,8 @@ jQuery(document).ready(function() {
 });
 
 function main(canvas) {
-    var cubes = new Array(new Square({x: 10, y: 10}, {w: 10, h: 10}, undefined, canvas));
+    var cubes = new Array(new Square({x: 10, y: 10},
+				     {w: 10, h: 10}, undefined, canvas));
     var head = cubes[0];
     var direction = 'd';
     var pause = false;
@@ -12,11 +13,12 @@ function main(canvas) {
     var food = undefined;
     var date = new Date();
     var timer = date.getTime();
-
+    
     // catch the key
     var textbox = document.createElement("input");
     textbox.setAttribute('type', 'text', 0);
-    textbox.setAttribute('style', 'position: absolute;top: -9999em;left: -9999em;', 0);
+    textbox.setAttribute('style',
+			 'position: absolute;top: -9999em;left: -9999em;', 0);
     jQuery("body").append(textbox);
     jQuery(textbox).bind("keyup", function (e) {
         var key = e.keyCode || e.which;
@@ -50,7 +52,7 @@ function main(canvas) {
                 move();
                 return ;
             }
-
+	    
             // Move the head of the snake
             var oldPoint = {x: head.point.x, y: head.point.y};
             if (direction == 'd')
@@ -58,10 +60,10 @@ function main(canvas) {
             else if (direction === 'u')
                 head.moveTo({x: head.point.x, y: head.point.y - head.size.h});
             else if (direction === 'r')
-                    head.moveTo({x: head.point.x + head.size.w, y: head.point.y});
+                head.moveTo({x: head.point.x + head.size.w, y: head.point.y});
             else if (direction === 'l')
-                    head.moveTo({x: head.point.x - head.size.w, y: head.point.y});
-
+                head.moveTo({x: head.point.x - head.size.w, y: head.point.y});
+	    
             // move the corps of the snake
             var tmpPoint;
             for (var i = 1 ; i < cubes.length ; ++i) {
@@ -72,16 +74,20 @@ function main(canvas) {
 
             // check if you loose
             if ((head.point.x + head.size.w > canvas.width)
-                    || (head.point.x < 0)
-                    || (head.point.y + head.size.h > canvas.height)
-                    || (head.point.y < 0)) {
-                alert("You loose !!!");
+                || (head.point.x < 0)
+                || (head.point.y + head.size.h > canvas.height)
+                || (head.point.y < 0))
                 loose = true;
-                return ;
-            }
+	    else if (eatme(cubes) == true)
+		loose = true;
+	    if (loose == true) {
+		alert("You loose !!!");
+		return ;
+	    }
 
             // check if you eat
-            if (food && head.point.x == food.point.x && head.point.y == food.point.y) {
+            if (food && head.point.x == food.point.x
+		&& head.point.y == food.point.y) {
                 cubes.push(food);
                 score += 20;
                 food = undefined;
@@ -91,9 +97,13 @@ function main(canvas) {
 
             // put the food on the area
             if (timer + 5000 <= date.getTime() && !food) {
-                food = new Square({x: Math.round(Math.random() * (canvas.width - head.size.w) / head.size.w) * head.size.w,
-                    y: Math.round(Math.random() * (canvas.height - head.size.h) / head.size.h) * head.size.h},
-                {w: 10, h: 10}, undefined, canvas);
+                food = new Square({x: Math.round(Math.random()
+						 * (canvas.width - head.size.w)
+						 / head.size.w) * head.size.w,
+				   y: Math.round(Math.random()
+						 * (canvas.height - head.size.h)
+						 / head.size.h) * head.size.h},
+				  {w: 10, h: 10}, undefined, canvas);
                 timer = date.getTime();
             }
             // remove the food on the area
@@ -111,4 +121,13 @@ function main(canvas) {
 
 function displayScore(score) {
     document.getElementById("score").innerHTML = score;
+}
+
+function eatme(cubes) {
+    var head = cubes[0];
+    for (var i = 1 ; i < cubes.length ; ++i)
+	if (head.point.x == cubes[i].point.x
+	    && head.point.y == cubes[i].point.y)
+	    return true;
+    return false;
 }
